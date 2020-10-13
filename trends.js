@@ -1,10 +1,11 @@
 const googleTrends = require('google-trends-api');
 const lookup = require('country-code-lookup');
 
-function getInyterestByRegion(){
-    googleTrends.interestByRegion({keyword: 'Buhari', startTime: new Date('2017-02-01'), endTime: new Date('2017-02-06'), geo: 'NG'})
-    .then((res) => {
-    console.log(res['Default']);
+function getInyterestByRegion(req, res){
+    googleTrends.interestByRegion({keyword: 'laycon', startTime: new Date('2017-02-01'), endTime: new Date(), geo: 'NG'})
+    .then((response) => {
+    //console.log(res);
+    res.end(response)
     }).catch((err) => {
         console.log(err);
     })
@@ -13,10 +14,10 @@ function getInyterestByRegion(){
 
 function getTrends(req,res){
     let date = req.query.date;
-    let dd = date.split(',')
-   // console.log(dd);
+    // let dd = date.split(',')
+    // console.log(dd);
     let arr = [];
-    let dr = lookup.byCountry(dd[1])
+    let dr = lookup.byCountry(date)
     console.log(dr)
     let geoname = ''
     if(dr==null){
@@ -26,12 +27,13 @@ function getTrends(req,res){
     }
     //console.log(dr)
     googleTrends.dailyTrends({
-        trendDate: new Date(dd[0]),
+        trendDate: new Date(),
         geo: geoname,
+        keyword: 'trump'
       }, function(err, results) {
         if (err) {
-            res.status(500).send({ error: "boo:(" });
-          console.log(err);
+            res.status(500).send({ error: err });
+          // console.log(err);
         }else{
           //console.log(results);
           let obj = JSON.parse(results);

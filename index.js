@@ -5,11 +5,12 @@ var firebase = require('firebase');
 app.use(express.json());
 var bodyParser = require('body-parser');
 var tweetservcice  = require('./tweetsservice');
+var instagramservice = require('./instagramservice');
 var trends = require('./trends');
 var fbase = require('./fbase');
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
-var firebaseConfig = {
+var firebaseConfig = { 
     apiKey: "AIzaSyAkA7vDIs0UJitojpt9OZ5oQNlpHbACaHE",
     authDomain: "makemeup-2bf71.firebaseapp.com",
     databaseURL: "https://makemeup-2bf71.firebaseio.com",
@@ -26,13 +27,30 @@ app.get('/getTweetsByHashTag',(req,res)=>{
     tweetservcice.gettweetbyhash(req,res)
 })
 
-app.get('gettrends',(req,res)=>{
+app.get('/gettrends',(req,res)=>{
     trends.getTrends(req,res)
 })
 
+app.get('/getInterestByRegion', (req, res) => {
+    trends.getInyterestByRegion(req, res);
+})
+
 app.get('/getTweetRating',(req,res)=>{
-    trends.getTrends(req,res)
-    //tweetservcice.getTweetRating(req,res)
+    // trends.getTrends(req,res)
+    tweetservcice.getTweetRating(req,res)
+})
+
+app.get('/getPositiveTweetsForHashtags', (req, res) => {
+    tweetservcice.getPositiveTweetsForHashtag(req, res);
+})
+
+app.get('/getNegativeTweetsForHashtags', (req, res) => {
+    tweetservcice.getNegativeTweetsForHashtag(req, res);
+})
+
+app.get('/getMultipleTweetRatings',(req,res)=>{
+    // trends.getTrends(req,res)
+    tweetservcice.getTweetRatingforHashTags(req,res)
 })
 
 app.get('/getUserProducts',(req,res)=>{ 
@@ -50,5 +68,12 @@ app.get('/getCountryCodes',(req,res)=>{
     trends.getCountryCodes(req,res)
 })
 
+app.get('/auth/instagram', (req, res) => {
+    instagramservice.searchinstagram(req, res)
+})
 
-app.listen(3000,()=>{console.log('app listening')}) 
+app.get('/auth/instagram/callback', (req, res) => {
+    instagramservice.instagramAuthCallBack(req, res);
+})
+
+app.listen(3001,()=>{console.log('app listening')})
