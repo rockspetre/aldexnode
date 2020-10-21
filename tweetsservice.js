@@ -2,11 +2,18 @@ var Twitter = require('twitter');
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
 
-var client = new Twitter({
+/*var client = new Twitter({
     consumer_key: '3hZrLLxAGqO6dBsmvfJ87R56',
     consumer_secret: 'jPpMKLLF0s9MMMv9UvMLHYlhmbVzmFQelKcEhLmn0novc0Gop0',
     bearer_token: 'AAAAAAAAAAAAAAAAAAAAAHej9wAAAAAAUZLbKnQTnsncYEY5tz1eLMRiO3Y%3DOyXr2stj6I1TujlNB90qGGrS5cBCTTkk1HonDIEbOvV2d12bby'
   });
+  */
+ var client = new Twitter({
+  consumer_key: 'X2ln4ZX5sAj32VSSlwrNq7LLm',
+  consumer_secret: 'mCGRBwIcXzCODUfZiPidcgw4I0siaC9y0NzdCIkkrpOeysjtrP',
+  bearer_token: 'AAAAAAAAAAAAAAAAAAAAAIPbIwEAAAAACzDSDOWexxJGSiGyOFljZeA2YHs%3D927NEobK2FwEPT0WLg5wZc1fI8LJOKVb2o8fPzeEwn2TEHECIZ'
+});
+
 
 
 

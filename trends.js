@@ -74,19 +74,21 @@ function getTrends(req,res){
 function getInterestOvertime(req,res){
     let arr = [];
     let key = req.query.key;
+    console.log(key)
     let country = req.query.country;
-    //console.log(country)
+    console.log(country)
     let code = lookup.byCountry(country)
-    //console.log('Hash:    '+key+'  '+code.iso2+'  '+country)
+    console.log(code)
     googleTrends.interestByRegion({keyword: key,  startTime: new Date('2017-02-01'), endTime: new Date(), geo: code.iso2})
     .then((result) => {
         const dd = JSON.parse(result);
+        // console.log(dd);
         let data = dd.default.geoMapData;
         for(let i=0;i<data.length;i++){
             let innerdata = data[i];
             let name = innerdata.geoName;
             let rating = innerdata.value[0]
-            console.log(name+' '+rating)
+            // console.log(name+' '+rating)
             arr.push({
                 name:name,
                 rating:rating
@@ -100,13 +102,16 @@ function getInterestOvertime(req,res){
     })
 }
 
-function getPotentialCompetition(req,res){
+function getRelatedTopics(req,res){
     let arr=[]
     let key = req.query.key;
-    googleTrends.relatedQueries({keyword: key})
+    let country = req.query.country;
+    console.log(country)
+    let code = lookup.byCountry(country)
+    googleTrends.relatedQueries({keyword: key, geo:code.iso2})
 .then((result) => {
-  console.log(result);
-  res.send(result)
+  // console.log(result);
+  res.end(result)
 })
 .catch((err) => {
   console.log(err);
@@ -116,6 +121,6 @@ function getPotentialCompetition(req,res){
 module.exports={
     getInyterestByRegion:getInyterestByRegion,
     getInterestOvertime:getInterestOvertime,
-    getPotentialCompetition:getPotentialCompetition,
+    getPotentialTopics:getRelatedTopics,
     getTrends:getTrends
 }

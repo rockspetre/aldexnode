@@ -61,8 +61,8 @@ app.get('/getInterestOverTime',(req,res)=>{
     trends.getInterestOvertime(req,res)
 })
 
-app.get('/getPotentialCompetition',(req,res)=>{
-    trends.getPotentialCompetition(req,res)
+app.get('/getRelatedTopics',(req,res)=>{
+    trends.getPotentialTopics(req,res)
 })
 app.get('/getCountryCodes',(req,res)=>{
     trends.getCountryCodes(req,res)
