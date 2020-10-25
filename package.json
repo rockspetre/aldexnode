@@ -9,6 +9,7 @@
   "author": "Ugochukwu Nwajagu",
   "license": "ISC",
   "dependencies": {
+    "@tensorflow/tfjs": "^2.6.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "country-code-lookup": "0.0.16",
@@ -23,6 +24,7 @@
     "instagram-web-api": "^2.2.2",
     "node-instagram": "^4.3.0",
     "sentiment": "^5.0.2",
+    "twit": "^2.2.11",
     "twitter": "^1.7.1"
   }
 }

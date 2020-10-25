@@ -2,6 +2,20 @@ var Twitter = require('twitter');
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
 
+var Twit = require('twit')
+
+var T = new Twit({
+  consumer_key: 'X2ln4ZX5sAj32VSSlwrNq7LLm',
+  consumer_secret:  'mCGRBwIcXzCODUfZiPidcgw4I0siaC9y0NzdCIkkrpOeysjtrP',
+  access_token: '1317857354273247232-GCRrPIDhXbRC4L9TpwPK1jdnDtdEno',
+  access_token_secret:  'ttd5ckCgEMTov20uEWmV9xbatwxgCLJp9XESvrSAM3EOD',
+  timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
+  strictSSL:            true,     // optional - requires SSL certificates to be valid.
+})
+
+// new access_token = 1317857354273247232-GCRrPIDhXbRC4L9TpwPK1jdnDtdEno
+// new token secret = ttd5ckCgEMTov20uEWmV9xbatwxgCLJp9XESvrSAM3EOD
+
 /*var client = new Twitter({
     consumer_key: '3hZrLLxAGqO6dBsmvfJ87R56',
     consumer_secret: 'jPpMKLLF0s9MMMv9UvMLHYlhmbVzmFQelKcEhLmn0novc0Gop0',
@@ -82,7 +96,7 @@ var sentiment = new Sentiment();
     client.get('search/tweets', {q: hash,count:100,lang:'en'}, function(error, tweets, response) {
         //console.log(tweets)
         //let count = tweets.statuses.length;
-        let val = 0;
+        let val = 0; 
         let positives = 0;
         let negatives = 0;
         //console.log(count)
@@ -159,60 +173,91 @@ var sentiment = new Sentiment();
   }
 
   function getpositivetweetsforhashTags(req,res){
-    let hashkey = req.query.hash;
-    let arr = [];
-    let hashes = hashkey.split(',');
-    let count = 0;
-    console.log(hashes)
-    hashes.forEach(async (hash) => {
-      client.get('search/tweets', {q: hash,count:20,lang:'en'}, function(error, tweets, response) {
-        tweets.statuses.forEach(function(tweet) {
+    let hash = req.query.hash;
+    console.log('Hash:    '+hash)
+    let arr = []
+    client.get('search/tweets', {q: hash,count:20,lang:'en'}, function(error, tweets, response) {
+        //console.log(tweets)
+        let count = tweets.statuses.length;
+        let val = 0;
+        // console.log(count)
+       tweets.statuses.forEach(function(tweet) {
           let dd = tweet.text;
           let analysis = getSentimentfortweet(dd);
-          let cal = parseInt(analysis.score)
-          if(cal > 0){
+          let score = analysis.score;
+          let call = analysis.calculation;
+          let words = [];
+          // console.log(call)
+          if(score > 0 ){
+            if(call[0]!=null){
+   
+          for ( var property in call[0] ) {
+            console.log( property ); // Outputs: foo, fiz or fiz, foo
+            words.push(property);
             arr.push({
-              text: tweet.text,
+              rating:words,
+              tweet:dd,
+              //imageUrl: img
               id: tweet.id,
               imageUrl: tweet.user.profile_image_url,
-              createdAt: tweet.created_at,
-              hashTag: hash,
+              createdAt: tweet.created_at
             })
-            count = count + 1;
           }
-        });
-        if(arr.length == hashes.length*count){
-          res.end(JSON.stringify(arr))
-        }
-      });
-    })
+         }
+          }
+       });
+       if(arr.length>0){
+        // console.log(arr)
+        res.end(JSON.stringify(arr))
+       }
+       else{
+           res.end('No data for this search')
+       }
+    }); 
   }
 
-  function getnegativetweetsforhashTags(req,res){
-    let hashkey = req.query.hash;
-    let arr = [];
-    let hashes = hashkey.split(',');
-    console.log(hashes)
-    hashes.forEach(async (hash) => {
-      client.get('search/tweets', {q: hash,count:20,lang:'en'}, function(error, tweets, response) {
-        let count = 0;
-        tweets.statuses.forEach(function(tweet) {
+  function getnegativetweetsforhashTags(req,res){ 
+    let hash = req.query.hash;
+    console.log('Hash:    '+hash)
+    let arr = []
+    client.get('search/tweets', {q: hash,count:20,lang:'en'}, function(error, tweets, response) {
+        //console.log(tweets)
+        let count = tweets.statuses.length;
+        let val = 0;
+        // console.log(count)
+       tweets.statuses.forEach(function(tweet) {
           let dd = tweet.text;
           let analysis = getSentimentfortweet(dd);
-          let cal = parseInt(analysis.score)
-          if(cal < 0){
+          let score = analysis.score;
+          let call = analysis.calculation;
+          let words = [];
+          // console.log(call)
+          if(score < 0 ){
+            if(call[0]!=null){
+   
+          for ( var property in call[0] ) {
+            console.log( property ); // Outputs: foo, fiz or fiz, foo
+            words.push(property);
             arr.push({
-              text: tweet.text,
+              rating:words,
+              tweet:dd,
+              //imageUrl: img
               id: tweet.id,
               imageUrl: tweet.user.profile_image_url,
-              createdAt: tweet.created_at,
-              hashTag: hash,
+              createdAt: tweet.created_at
             })
           }
-        });
-      });
-      res.end(JSON.stringify(arr))
-    })
+         }
+          }
+       });
+       if(arr.length>0){
+        // console.log(arr)
+        res.end(JSON.stringify(arr))
+       }
+       else{
+           res.end('No data for this search')
+       }
+    }); 
   }
 
   module.exports = {
