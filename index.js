@@ -68,7 +68,7 @@ app.get('/getCountryCodes',(req,res)=>{
     trends.getCountryCodes(req,res)
 })
 
-app.get('/auth/instagram', (req, res) => {
+app.get('/searchinstagram', (req, res) => {
     instagramservice.searchinstagram(req, res)
 })
 
