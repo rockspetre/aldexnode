@@ -17,24 +17,24 @@ function searchinstagramfeeds(req, res){
         var bar = new Promise((resolve, reject) => {
           result.medias.forEach((value, index, array) => {
               // console.log(value);
-              let score = getSentimentfortweet(value.text.replace(/(\.|\,|\!)/g, '').replace('\\n', ''));
+              let score = getSentimentfortweet(value.text);
               let call = score.calculation;
               let words = [];
               for ( var property in call[0] ) {
                 words.push(property);
-              }
+              } 
               arr.push({
                 tag: tag,
                 score: score.score,
                  words: words,
-                text: value.text.replace('\\n', ' '),
+                text: value.text,
                 image: value.display_url,
                 likes: value.like_count,
                 comments: value.comment_count,
               });
               if (index === array.length -1) resolve(); 
           });
-      });
+      }); 
       bar.then(() => { 
         // console .log(arr)
         res.end(JSON.stringify(arr))
