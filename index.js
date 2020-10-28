@@ -80,4 +80,4 @@ app.get('*', (req, res) => {
     res.send('Aldex backend Working')
 })
 
-app.listen(3001,()=>{console.log('app listening')})
+app.listen(3000,()=>{console.log('app listening')})
