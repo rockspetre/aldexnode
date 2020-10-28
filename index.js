@@ -76,4 +76,8 @@ app.get('/auth/instagram/callback', (req, res) => {
     instagramservice.instagramAuthCallBack(req, res);
 })
 
+app.get('*', (req, res) => {
+    res.send('Aldex backend Working')
+})
+
 app.listen(3001,()=>{console.log('app listening')})
