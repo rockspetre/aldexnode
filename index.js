@@ -23,7 +23,6 @@ app.get('/getInterestByRegion', (req, res) => {
 })
 
 app.get('/getTweetRating',(req,res)=>{
-    // trends.getTrends(req,res)
     tweetservcice.getTweetRating(req,res)
 })
 
@@ -36,7 +35,6 @@ app.get('/getNegativeTweetsForHashtags', (req, res) => {
 })
 
 app.get('/getMultipleTweetRatings',(req,res)=>{
-    // trends.getTrends(req,res)
     tweetservcice.getTweetRatingforHashTags(req,res)
 })
 
@@ -59,7 +57,7 @@ app.get('/auth/instagram/callback', (req, res) => {
     instagramservice.instagramAuthCallBack(req, res);
 })
 
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
     res.send('Aldex backend Working')
 })
 

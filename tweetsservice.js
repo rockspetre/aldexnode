@@ -2,7 +2,7 @@ var Twitter = require('twitter');
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
 
-var Twit = require('twit')
+/* var Twit = require('twit')
 
 var T = new Twit({
   consumer_key: 'X2ln4ZX5sAj32VSSlwrNq7LLm',
@@ -11,7 +11,7 @@ var T = new Twit({
   access_token_secret:  'ttd5ckCgEMTov20uEWmV9xbatwxgCLJp9XESvrSAM3EOD',
   timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
   strictSSL:            true,     // optional - requires SSL certificates to be valid.
-})
+}) */
 
 // new access_token = 1317857354273247232-GCRrPIDhXbRC4L9TpwPK1jdnDtdEno
 // new token secret = ttd5ckCgEMTov20uEWmV9xbatwxgCLJp9XESvrSAM3EOD
