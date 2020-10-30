@@ -1,6 +1,7 @@
 var Twitter = require('twitter');
 var Sentiment = require('sentiment');
 var sentiment = new Sentiment();
+var ig = require('instagram-scraping');
 
 /* var Twit = require('twit')
 
@@ -35,6 +36,33 @@ var T = new Twit({
   function getSentimentfortweet(tweet){
       let analysis = sentiment.analyze(tweet);
       return analysis;
+  }
+
+  function searchinstagramfeeds(req, res){ 
+    let tag = req.query.hash;
+    res.end(JSON.stringify(tag))
+      /* ig.scrapeTag(tag).then(result => {
+          // console.dir(result);
+          // console.log(tag)
+           res.end(JSON.stringify(result.medias.map((x) => {
+            let score = getSentimentfortweet(x.text);
+            let call = score.calculation;
+            let words = [];
+            for ( var property in call[0] ) {
+              words.push(property);
+            } 
+             return {
+               text: x.text,
+               image: x.display_url,
+               likes: x.like_count,
+               comments: x.comment_count,
+               score: score.score,
+               tag: tag,
+               words: words
+             }
+           })))
+      })*/
+      
   }
 
    function getTweetsByHashTag(req,res){
@@ -131,6 +159,7 @@ var T = new Twit({
        }
     }); 
   }
+  
 
   function getTweetRatingforHashTags(req,res){
     let hashkey = req.query.hash;
@@ -266,4 +295,5 @@ var T = new Twit({
     getTweetRatingforHashTags: getTweetRatingforHashTags,
     getPositiveTweetsForHashtag: getpositivetweetsforhashTags,
     getNegativeTweetsForHashtag: getnegativetweetsforhashTags,
+    igSearch: searchinstagramfeeds,
   };
