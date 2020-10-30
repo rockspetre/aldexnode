@@ -14,10 +14,6 @@ app.get('/getTweetsByHashTag',(req,res)=>{
     tweetservcice.gettweetbyhash(req,res)
 })
 
-app.get('/gettrends',(req,res)=>{
-    trends.getTrends(req,res)
-})
-
 app.get('/getInterestByRegion', (req, res) => {
     trends.getInyterestByRegion(req, res);
 })
@@ -45,17 +41,11 @@ app.get('/getInterestOverTime',(req,res)=>{
 app.get('/getRelatedTopics',(req,res)=>{
     trends.getPotentialTopics(req,res)
 })
-app.get('/getCountryCodes',(req,res)=>{
-    trends.getCountryCodes(req,res)
-})
 
 app.get('/searchinstagram', (req, res) => {
     instagramservice.searchinstagram(req, res)
 })
 
-app.get('/auth/instagram/callback', (req, res) => {
-    instagramservice.instagramAuthCallBack(req, res);
-})
 
 app.get('/', (req, res) => {
     res.send('Aldex backend Working')

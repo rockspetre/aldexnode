@@ -44,12 +44,8 @@ function searchinstagramfeeds(req, res){
 }
 
 
-async function authCallBack(req, res) {
-
-}
 
 
 module.exports = {
-    searchinstagram: searchinstagramfeeds,
-    instagramAuthCallBack: authCallBack,
+    searchinstagram: searchinstagramfeeds
 }
