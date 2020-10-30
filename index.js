@@ -14,7 +14,7 @@ app.get('/getTweetsByHashTag',(req,res)=>{
     tweetservcice.gettweetbyhash(req,res)
 })
 
-app.get('/searchinstagram', (req, res) => {
+app.get('/getinstagram', (req, res) => {
     tweetservcice.igSearch(req, res)
 })
 
