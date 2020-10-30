@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var tweetservcice  = require('./tweetsservice');
 var instagramservice = require('./instagramservice');
 var trends = require('./trends');
-var fbase = require('./fbase');
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -39,10 +38,6 @@ app.get('/getNegativeTweetsForHashtags', (req, res) => {
 app.get('/getMultipleTweetRatings',(req,res)=>{
     // trends.getTrends(req,res)
     tweetservcice.getTweetRatingforHashTags(req,res)
-})
-
-app.get('/getUserProducts',(req,res)=>{ 
-    fbase.getuserproducts(req,res)
 })
 
 app.get('/getInterestOverTime',(req,res)=>{
