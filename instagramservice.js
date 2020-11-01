@@ -1,40 +1,41 @@
 var ig = require('instagram-scraping');
 var Sentiment = require('sentiment');
+let Instagram = require('instagram-nodejs-without-api');
+Instagram = new Instagram()
 var sentiment = new Sentiment();
+
 
 function getSentimentfortweet(tweet){
   let analysis = sentiment.analyze(tweet);
   return analysis;
 }
 
-function searchinstagramfeeds(req, res){ 
-  let arr = [];
-  let tag = req.query.hash;
-     ig.scrapeTag(tag).then(result => {
-        // console.dir(result);
-        // console.log(tag)
-         res.end(JSON.stringify(result.medias.map((x) => {
-          let score = getSentimentfortweet(x.text);
-          let call = score.calculation;
-          let words = [];
-          for ( var property in call[0] ) {
-            words.push(property);
-          } 
-           return {
-             text: x.text,
-             image: x.display_url,
-             likes: x.like_count,
-             comments: x.comment_count,
-             score: score.score,
-             tag: tag,
-             words: words
-           }
-         })))
+/* function searchinstagramfeeds(req, res){ 
+  Instagram.getCsrfToken().then((csrf) =>
+  {
+    Instagram.csrfToken = csrf;
+  }).then(() =>
+  {
+    return Instagram.auth('rockspetre', 'pajagu').then(sessionId =>
+    {
+      Instagram.sessionId = sessionId
+  
+      return Instagram.getUserDataByUsername('sayhofesh').then((t) =>
+      {
+        return Instagram.getUserFollowers(t.graphql.user.id).then((t) =>
+        {
+          console.log(t); // - instagram followers for user "username-for-get"
+        })
+      })
+  
     })
+  }).catch(console.error);
     
-}
+} */
 
-/*
+
+
+
 function searchinstagramfeeds(req, res){ 
   let arr = [];
   let tag = req.query.hash;
@@ -70,7 +71,7 @@ function searchinstagramfeeds(req, res){
     })
     
 }
-*/
+
 
 
 

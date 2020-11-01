@@ -69,7 +69,7 @@ var T = new Twit({
     let hash = req.query.hash;
     console.log('Hash:    '+hash)
     let arr = []
-    client.get('search/tweets', {q: hash,count:20,lang:'en'}, function(error, tweets, response) {
+    client.get('search/tweets', {q: hash,count:200,lang:'en'}, function(error, tweets, response) {
         //console.log(tweets)
         let count = tweets.statuses.length;
         let val = 0;
@@ -121,7 +121,7 @@ var T = new Twit({
   function getTweetRating(req,res){
     let hash = req.query.hash;
    // console.log('Hash:    '+hash)
-    client.get('search/tweets', {q: hash,count:100,lang:'en'}, function(error, tweets, response) {
+    client.get('search/tweets', {q: hash,count:200,lang:'en'}, function(error, tweets, response) {
         //console.log(tweets)
         //let count = tweets.statuses.length;
         let val = 0; 
@@ -170,7 +170,7 @@ var T = new Twit({
       let val = 0;
       let positives = 0;
       let negatives = 0;
-      client.get('search/tweets', {q: hash,count:20,lang:'en'}, function(error, tweets, response) {
+      client.get('search/tweets', {q: hash,count:200,lang:'en'}, function(error, tweets, response) {
         let count = 0;
         tweets.statuses.forEach(function(tweet) {
           let dd = tweet.text;
@@ -205,7 +205,7 @@ var T = new Twit({
     let hash = req.query.hash;
     console.log('Hash:    '+hash)
     let arr = []
-    client.get('search/tweets', {q: hash,count:20,lang:'en'}, function(error, tweets, response) {
+    client.get('search/tweets', {q: hash,count:200,lang:'en'}, function(error, tweets, response) {
         //console.log(tweets)
         let count = tweets.statuses.length;
         let val = 0;
@@ -249,7 +249,7 @@ var T = new Twit({
     let hash = req.query.hash;
     console.log('Hash:    '+hash)
     let arr = []
-    client.get('search/tweets', {q: hash,count:20,lang:'en'}, function(error, tweets, response) {
+    client.get('search/tweets', {q: hash,count:200,lang:'en'}, function(error, tweets, response) {
         //console.log(tweets)
         let count = tweets.statuses.length;
         let val = 0;
